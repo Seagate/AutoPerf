@@ -54,8 +54,8 @@
      name: telegraf
      state: latest
      update_cache: yes
-   delegate_to: "{{ item }}"
-   with_items: "{{ groups['all'] }}"
+   deate_to: "{{ item }}"
+   with_legitems: "{{ groups['all'] }}"
 
  - name: Compress directory files/cortx-benchmark into files/cortx-benchmark.tar.gz
    archive:
@@ -92,7 +92,7 @@
      marker: "# {mark} ANSIBLE MANAGED BLOCK "
      insertafter: '^\[\[outputs.influxdb\]\]'
      block: |
-       urls = ["http://{{ url }}:8086"]
+       urls = ["{{ url }}"]
        database = "{{ database }}"
        username = "{{ username }}"
        password = "{{ password }}"

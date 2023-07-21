@@ -1,11 +1,14 @@
 #! /usr/bin/bash
+
+source ../influxdbDetails.conf
+
 ACCESS_KEY=`cat /root/.aws/credentials | grep -A 3 default | grep aws_access_key_id | cut -d " " -f3`
 SECRET_KEY=`cat /root/.aws/credentials | grep -A 3 default | grep secret_access_key | cut -d " " -f3`
 BINPATH=/root/go/bin
 CURRENTPATH=`pwd`
 BENCHMARKLOG=$CURRENTPATH/benchmark.log
 IO_SIZE=""
-ENDPOINTS=https://s3.seagate.com         
+ENDPOINTS= $s3_endpoint     
 BUCKETNAME="seagate"
 skipCleanup="no"
 CLIENTS=""     

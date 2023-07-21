@@ -33,9 +33,9 @@ Workload Creation/Management:
     For example:
     sh configure.sh
     Enter the label for S3 setup:s3setup
-    S3 endpoint url: https://s3.seagate.com
-    Access Key: wk2fXspKR1iNNy3GAiG6Ew
-    Secret Key:  8dgXIM+ouFYtv1ELApIO+hDHYfWOxhNRxj0hIf7Y
+    S3 endpoint url:
+    Access Key:
+    Secret Key:
 
     Above script execution will create file s3setup.properties file which will contain s3 credentials
     and s3 endpoint. This s3setup.propertied file will be used for various other actions

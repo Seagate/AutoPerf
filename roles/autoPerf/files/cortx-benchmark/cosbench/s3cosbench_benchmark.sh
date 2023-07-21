@@ -70,15 +70,7 @@ system_monitoring()
       flag=true
       sleep 60
       while [ true ]
-      do 
-#         if tail -n 1 ~/cos/log/system.log | grep "START WORK: 5050rw" > /dev/null 2>$1;
-#         then
-#             if $flag;
-#             then
-#                flag=false
-#                ssh sm18-r19.pun.seagate.com "./failoverfailback.sh > failback.log" &
-#             fi    
-#         fi
+      do
          if tail -n 1 ~/cos/log/system.log | grep "throughput" > /dev/null 2>&1;
          then
              ./monitor_performance.sh $1 ~/cos/log/system.log cosbench $2

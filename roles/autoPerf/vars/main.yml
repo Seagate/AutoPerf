@@ -1,9 +1,10 @@
 ---
 # vars file for autoPerf
-url: "10.237.64.248"
-database: "performance_db"
-username: "performance"
-password: "seagate"
-benchmarkdb: "performance_db"
 
-
+database: "performance_db" # mention database name or create one with same name
+username: "performance" # mention username or create one with same name
+password: "" # mention password
+benchmarkdb: "performance_db" # mention database or create one with same name
+time_endpoint: "" # e.g. time.example.com
+s3_endpoint: "" 
+url: "" # database URL

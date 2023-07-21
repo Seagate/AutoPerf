@@ -21,34 +21,34 @@
   with_items: "{{ groups['all'] }}"
 
 - name: "Sanity Check (Nodes and clients): NTP Service start|stop|restart"
-  shell: systemctl stop ntpd ; /usr/sbin/ntpdate time.seagate.com ; systemctl start ntpd
+  shell: systemctl stop ntpd ; /usr/sbin/ntpdate {{ time_endpoint }} ; systemctl start ntpd
   delegate_to: "{{ item }}"
   with_items: "{{ groups['all'] }}"
 
 - name: Sanity check (client)
   block:
-    - name: "Searching for 's3.seagate.com' entry in '/etc/hosts' file"
-      shell: "grep s3.seagate.com /etc/hosts"
+    - name: "Searching for S3 endpoint - {{ s3_endpoint }} entry in '/etc/hosts' file"
+      shell: "grep {{ s3_endpoint }} /etc/hosts"
       register: result
       ignore_errors: yes
       no_log: True
       delegate_to: "clientnode-1"
 
-    - name: "'Failuers' detector in above result for searching 's3.seagate.com' entry in '/etc/hosts' file"
+    - name: "'Failuers' detector in above result for searching entry in '/etc/hosts' file"
       when: result.rc != 0
-      fail: msg="'s3.seagate.com' entry not found in  '/etc/hosts' file"
+      fail: msg="{{ s3_endpoint }} entry not found in  '/etc/hosts' file"
 
 
-    - name: "Checking 's3.seagate.com' is reachable or not"
-      shell: "ping -c 1 S3.seagate.com"
+    - name: "Checking S3 endpoint - {{ s3_endpoint }} is reachable or not"
+      shell: "ping -c 1 {{ s3_endpoint }}"
       register: result
       ignore_errors: yes
       no_log: True
       delegate_to: "clientnode-1"
 
-    - name: "'Failuers' detector in above result for Checking 's3.seagate.com' is reachable or not"
+    - name: "'Failuers' detector in above result for checking S3 endpoint - {{ s3_endpoint }} is reachable or not"
       when: result.rc != 0
-      fail: msg="'s3.seagate.com' is not reachable, one possible reason 's3.seagate.com' entry is commented in '/etc/hosts' file"
+      fail: msg="{{ s3_endpoint }} is not reachable, one possible reason can be the S3 endpoint entry is commented in '/etc/hosts' file"
 
     - name: "Checking 'aws' package installed or not"
       shell: "pip3 list | grep aws || rpm -qa | grep -v grep | grep aws" 

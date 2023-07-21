@@ -1,4 +1,7 @@
 #! /bin/bash
+
+source ../influxdbDetails.conf
+
 BENCHMARK_PATH=/root/go/bin
 CURRENTPATH=`pwd`
 ACCESS_KEY=`cat /root/.aws/credentials | grep -A 3 default | grep aws_access_key_id | cut -d " " -f3`		
@@ -11,7 +14,7 @@ MAX_ATTEMPT=1
 NO_OF_THREADS=""			
 NO_OF_OBJECTS=""			
 REGION=US				
-ENDPOINTS=https://s3.seagate.com		
+ENDPOINTS=$s3_endpoint		
 COUNT=0
 SIZE_OF_OBJECTS=""
 JSON_FILENAME=				
